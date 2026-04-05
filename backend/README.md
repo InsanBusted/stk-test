@@ -33,6 +33,61 @@ Backend REST API untuk manajemen menu bertingkat (nested menu) yang dibangun den
 
 ---
 
+## 💡 Pemilihan Teknologi & Keputusan Arsitektur
+ 
+### Pemilihan Teknologi
+ 
+Tech stack yang digunakan dipilih berdasarkan familiaritas dan produktivitas pengembangan sehari-hari. Kombinasi **NestJS + Prisma + PostgreSQL** sudah menjadi stack utama yang digunakan, sehingga pengembangan dapat berjalan lebih cepat tanpa perlu banyak penyesuaian.
+ 
+- **NestJS** dipilih karena strukturnya yang modular dan opiniated, sehingga penulisan kode lebih konsisten dan mudah di-maintain.
+- **Prisma** dipilih sebagai ORM karena developer experience-nya yang baik — schema deklaratif, type-safety penuh, dan migrasi yang mudah dikelola.
+- **PostgreSQL** dipilih karena sudah terbukti handal untuk data relasional dan mendukung query kompleks dengan baik.
+- **class-validator** dipilih karena terintegrasi sangat baik dengan ekosistem NestJS untuk validasi request secara deklaratif lewat DTO.
+ 
+---
+ 
+### Keputusan Arsitektur
+ 
+#### Struktur Menu dengan `parentId`
+ 
+Struktur hierarki menu dirancang menggunakan pendekatan **Adjacency List** — setiap menu item hanya menyimpan satu field `parentId` yang merujuk ke parent langsungnya. Menu tanpa parent (root) memiliki `parentId: null`.
+ 
+```
+Menu A  (parentId: null)         ← root
+├── Menu B  (parentId: A)        ← child
+│   └── Menu C  (parentId: B)   ← sub-child
+└── Menu D  (parentId: A)        ← child
+```
+ 
+Pendekatan ini dipilih karena setiap menu item dapat **berpindah parent kapan saja** tanpa perlu menyimpan informasi level atau posisi secara eksplisit. Untuk mengetahui posisi sebuah menu (apakah dia child ke-1, sub-child, atau lebih dalam lagi), dilakukan **recursive loop** dari node tersebut ke atas hingga menemukan root — dari situlah nilai `depth` pada response tree dihitung secara dinamis.
+ 
+Keuntungan pendekatan ini:
+ 
+- **Fleksibel** — memindahkan menu ke parent mana pun cukup dengan mengubah satu field `parentId`
+- **Sederhana** — tidak perlu menyimpan metadata level/depth di database, depth dihitung dinamis saat membangun tree
+- **Scalable** — tidak ada batasan kedalaman level, bisa nested sedalam apapun
+ 
+#### Self-Relation pada Model Prisma
+ 
+Model `Menu` menggunakan **self-relation** — relasi ke dirinya sendiri — untuk merepresentasikan hubungan parent-child:
+ 
+```prisma
+model Menu {
+  id       String  @id @default(cuid())
+  name     String
+  order    Int     @default(0)
+  parentId String?
+ 
+  parent   Menu?   @relation("MenuToMenu", fields: [parentId], references: [id])
+  children Menu[]  @relation("MenuToMenu")
+}
+```
+ 
+Self-relation dipilih karena lebih **scalable** dibanding membuat tabel terpisah untuk setiap level menu. Dengan satu model saja, semua level hierarki dapat direpresentasikan tanpa perlu mengubah skema ketika kedalaman bertambah.
+ 
+ ---
+
+
 ## ✨ Fitur
 
 - CRUD menu (Create, Read, Update, Delete)
