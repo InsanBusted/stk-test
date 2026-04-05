@@ -1,6 +1,6 @@
 # 🌳 Menu Management System (Fullstack)
 
-Aplikasi **manajemen menu bertingkat (nested menu)** berbasis **fullstack JavaScript/TypeScript**.
+Aplikasi **manajemen menu bertingkat (nested menu)** berbasis **fullstack TypeScript**.
 
 Terdiri dari:
 
