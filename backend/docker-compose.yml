@@ -1,0 +1,16 @@
+services:
+  db:
+    image: postgres:17
+    container_name: menus
+    restart: always
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: menus
+    ports:
+      - "5433:5432"
+    volumes:
+      - menus_postgres_data:/var/lib/postgresql/data
+
+volumes:
+  menus_postgres_data:
