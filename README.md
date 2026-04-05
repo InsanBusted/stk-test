@@ -28,19 +28,32 @@ Terdiri dari:
 
 ## 📖 OVERVIEW
 
-Project ini adalah sistem untuk:
+Project ini merupakan hasil technical test fullstack yang dikerjakan oleh **Muhammad Insan Kamil** dengan tujuan membangun sistem manajemen menu bertingkat (menu tree system) berbasis fullstack.
 
-- Mengelola menu bertingkat (nested menu)
-- Mendukung relasi parent-child tanpa batas level
-- Menyediakan UI interaktif berbasis tree
+# STK - Technical Test Fullstack Web
 
-Cocok untuk:
+# Fullstack Menu Tree System
 
-- Sidebar admin dashboard
-- CMS menu
-- Navigation builder
+## Overview - The Goals 🎯
 
----
+Build a fullstack application that implements a hierarchical menu tree system with CRUD operations. The system should support nested menu items with unlimited depth, and implement the UI as similar as possible like in this figma:
+
+https://www.figma.com/design/Pa1vc4POl4DGsvDTutwM6k/Fullstack---ReactJS%2FVueJS
+
+## Tujuan Implementasi
+
+- Mengimplementasikan sistem menu bertingkat (tree structure)
+- Mendukung nested menu dengan kedalaman tanpa batas
+- Menyediakan operasi CRUD lengkap pada menu
+- Menampilkan UI yang mengikuti referensi desain Figma
+- Menjaga struktur backend dan frontend tetap scalable dan maintainable
+
+## Use Case Sistem
+
+- Sistem sidebar admin dashboard
+- Struktur navigasi dinamis
+- CMS menu builder
+- Layout navigasi bertingkat untuk aplikasi web
 
 ## 🧱 ARSITEKTUR SISTEM
 
