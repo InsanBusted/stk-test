@@ -365,6 +365,3 @@ app.useGlobalPipes(
 
 ---
 
-## 📄 Lisensi
-
-[MIT](LICENSE)
