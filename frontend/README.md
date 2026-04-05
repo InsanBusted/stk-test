@@ -42,13 +42,13 @@ npm install
 
 ### 2. Konfigurasi Environment Variable
 
-Buat file `.env.local` di root direktori `frontend`:
+Ketik di terminal
 
 ```bash
 cp .env.local .env
 ```
 
-Kemudian edit `.env.local` dan sesuaikan nilainya:
+Kemudian edit `.env` dan sesuaikan nilainya:
 
 ```env
 # URL backend REST API
