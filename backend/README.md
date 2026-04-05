@@ -28,7 +28,6 @@ Backend REST API untuk manajemen menu bertingkat (nested menu) yang dibangun den
 | [Prisma ORM](https://www.prisma.io/) | ^5.x | ORM untuk akses database |
 | [PostgreSQL](https://www.postgresql.org/) | 17 | Database relasional |
 | [class-validator](https://github.com/typestack/class-validator) | ^0.14.x | Validasi DTO/request body |
-| [class-transformer](https://github.com/typestack/class-transformer) | ^0.5.x | Transformasi objek DTO |
 | [Swagger (OpenAPI)](https://swagger.io/) | ^7.x | Dokumentasi API otomatis |
 | [Docker](https://www.docker.com/) | ^24.x | Containerisasi database |
 
@@ -344,17 +343,8 @@ Base URL: `http://localhost:8080/menus`
 
 ## 🛡️ Validasi & DTO
 
-Validasi request menggunakan `class-validator` dan `class-transformer` yang diterapkan secara global melalui `ValidationPipe` di `main.ts`.
+Validasi request menggunakan `class-validator`.
 
-```typescript
-app.useGlobalPipes(
-  new ValidationPipe({
-    whitelist: true,
-    forbidNonWhitelisted: true,
-    transform: true,
-  }),
-);
-```
 
 | DTO | Digunakan Oleh | Field |
 |---|---|---|
