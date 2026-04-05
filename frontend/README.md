@@ -6,15 +6,15 @@ Aplikasi dasbor modern yang dibangun dengan **Next.js 16**, **Zustand**, dan **s
 
 ## Tech Stack
 
-| Lapisan | Teknologi |
-|---|---|
-| Framework | [Next.js 16](https://nextjs.org/) (App Router) |
-| Bahasa | TypeScript 5 |
-| Manajemen State | [Zustand 5](https://zustand-demo.pmnd.rs/) |
-| Komponen UI | [shadcn/ui](https://ui.shadcn.com/) + Radix UI |
-| Styling | Tailwind CSS v4 |
-| Ikon | [Lucide React](https://lucide.dev/) |
-| Font | Plus Jakarta Sans, Geist (via `next/font`) |
+| Lapisan         | Teknologi                                      |
+| --------------- | ---------------------------------------------- |
+| Framework       | [Next.js 16](https://nextjs.org/) (App Router) |
+| Bahasa          | TypeScript 5                                   |
+| Manajemen State | [Zustand 5](https://zustand-demo.pmnd.rs/)     |
+| Komponen UI     | [shadcn/ui](https://ui.shadcn.com/) + Radix UI |
+| Styling         | Tailwind CSS v4                                |
+| Ikon            | [Lucide React](https://lucide.dev/)            |
+| Font            | Plus Jakarta Sans, Geist (via `next/font`)     |
 
 ---
 
@@ -45,7 +45,7 @@ npm install
 Buat file `.env.local` di root direktori `frontend`:
 
 ```bash
-cp .env .env.local
+cp .env.local .env
 ```
 
 Kemudian edit `.env.local` dan sesuaikan nilainya:
@@ -181,6 +181,7 @@ export const useSelectMenu = create<MenuStore>((set) => ({
 ```
 
 **Mengapa Zustand dibanding Context/Redux?**
+
 - Boilerplate minimal dibanding Redux Toolkit
 - Tidak perlu membungkus komponen dengan Provider untuk setiap store
 - Subscription yang granular menghindari render ulang yang tidak perlu
@@ -202,10 +203,17 @@ Komponen kemudian diimpor langsung:
 
 ```ts
 import { Button } from "@/components/ui/button";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 ```
 
 **Mengapa shadcn/ui?**
+
 - Tidak memiliki style bawaan di level primitif (via Radix UI) — kontrol styling penuh dengan Tailwind
 - Aksesibel secara default (ARIA, navigasi keyboard)
 - Tidak ada dependensi runtime — komponen ada di dalam codebase Anda
@@ -218,7 +226,10 @@ Google Fonts dimuat via `next/font/google` untuk menghilangkan layout shift (CLS
 
 ```ts
 // app/layout.tsx
-const plusJakartaSans = Plus_Jakarta_Sans({ variable: "--font-plus-jakarta-sans", subsets: ["latin"] });
+const plusJakartaSans = Plus_Jakarta_Sans({
+  variable: "--font-plus-jakarta-sans",
+  subsets: ["latin"],
+});
 const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 ```
 
@@ -243,9 +254,9 @@ State buka/tutup sidebar dikelola via React Context ringan (`SidebarProvider`) y
 
 ## Daftar Skrip
 
-| Perintah | Keterangan |
-|---|---|
-| `npm run dev` | Menjalankan server pengembangan |
-| `npm run build` | Membuild bundle production |
-| `npm start` | Menjalankan server production (butuh build terlebih dahulu) |
-| `npm run lint` | Menjalankan ESLint |
+| Perintah        | Keterangan                                                  |
+| --------------- | ----------------------------------------------------------- |
+| `npm run dev`   | Menjalankan server pengembangan                             |
+| `npm run build` | Membuild bundle production                                  |
+| `npm start`     | Menjalankan server production (butuh build terlebih dahulu) |
+| `npm run lint`  | Menjalankan ESLint                                          |
